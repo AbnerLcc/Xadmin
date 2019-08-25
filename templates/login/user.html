@@ -1,0 +1,54 @@
+{% extends 'login/check_base.html' %}
+
+
+{% block content %}
+    <h1 class="text-center">用户信息</h1>
+
+    {% if permission.add %}
+        <a href="/user/add/{{ data.pk }}" class="btn btn-primary">添加</a>
+    {% endif %}
+    <table class="table table-hover table-bordered  table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>用户名</th>
+            <th>角色</th>
+            {% if permission.delete1 %}
+                <th>操作</th>
+            {% endif %}
+
+            {% if permission.update %}
+                <th>操作1</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for data in data_list %}
+            <tr id="td">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ data.name }}</td>
+                <td>{% for role in data.roles.all %}
+                    {{ role.title }}
+                {% endfor %}
+                </td>
+                {% if permission.delete1 %}
+                    <td>
+                        <a href="/user/delete/{{ data.pk }}"><i class="fa fa-trash"></i>&ensp;删除</a>
+                    </td>
+                {% endif %}
+
+
+                {% if permission.update %}
+                    <td>
+                        <a href="/user/update/{{ data.pk }}"> <i class="fa fa-pencil"></i> &ensp;编辑</a>
+                    </td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+{% endblock content %}

@@ -1,0 +1,12 @@
+<div class="list-group">
+
+    {% for item in mean %}
+        {% if request.path ==  item.mean_url %}
+            <a href="{{ item.mean_url }}" class="list-group-item active">{{ item.mean_title}}</a>
+       {% else %}
+            <a href="{{ item.mean_url }}" class="list-group-item">{{ item.mean_title}}</a>
+        {% endif %}
+
+    {% endfor %}
+
+</div>
